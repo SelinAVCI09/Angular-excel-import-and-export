@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>{{ title }}</h1>
+  <input type="file" (change)="ReadExcel($event)">
+  
+  <table *ngIf="ExcelData?.length > 0" class="table">
+    <thead>
+      <tr>
+        <th *ngFor="let key of getKeys(ExcelData[0])">{{ key }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of ExcelData; let rowIndex = index">
+        <td *ngFor="let key of getKeys(row); let colIndex = index">
+          <input [(ngModel)]="ExcelData[rowIndex][key]" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <button (click)="exportToExcel()">Kaydet</button>
+</div>
